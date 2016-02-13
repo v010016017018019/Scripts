@@ -1,10 +1,11 @@
---[[ 개발
+--[[
 function OnLoad()
 print(myHero:GetSpellData(SUMMONER_1).name)
 print(myHero:GetSpellData(SUMMONER_2).name)
 end
-
+local dlastMessage = 0
 function OnTick()
+local d = myHero:GetSpellData(SUMMONER_1)
 local t = GetInGameTimer()
 local ts = t
 local tm = 0
@@ -26,6 +27,10 @@ elseif d.name == "summonerheal" then
 print("<font color=\"#A27AFE\"><b>"..myHero.charName.."<font color=\"#FF4848\"> HEAL ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
 elseif d.name == "summonerhaste" then
 print("<font color=\"#A27AFE\"><b>"..myHero.charName.."<font color=\"#FF4848\"> HASTE ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
+elseif d.name == "summonerbarrier" then
+print("<font color=\"#A27AFE\"><b>"..myHero.charName.."<font color=\"#FF4848\"> BARRIER ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
+elseif d.name == "summonerboost" then
+print("<font color=\"#A27AFE\"><b>"..myHero.charName.."<font color=\"#FF4848\"> BOOST ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
 else
 print("<font color=\"#A27AFE\"><b>"..myHero.charName.."<font color=\"#FF4848\"> D ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
 end
@@ -43,7 +48,8 @@ local t = GetInGameTimer()
 local ts = t
 local tm = 0
 
-if ed.currentCd > 0 and os.clock() - edlastMessage > 3 then
+if ed.currentCd > 0 and os.clock() - edlastMessage > 30 then
+ts = ts +ed.currentCd
 while ts >= 60 do
   tm = tm + 1
   ts = ts - 60
@@ -60,12 +66,17 @@ elseif ed.name == "summonerheal" then
 print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> HEAL ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
 elseif ed.name == "summonerhaste" then
 print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> HASTE ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
+elseif ed.name == "summonerbarrier" then
+print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> BARRIER ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
+elseif ed.name == "summonerboost" then
+print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> BOOST ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
 else
 print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> D ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
 end
 end
 
-if ef.currentCd > 0 and os.clock() - eflastMessage > 3 then
+if ef.currentCd > 0 and os.clock() - eflastMessage > 30 then
+ts = ts +ef.currentCd
 while ts >= 60 do
   tm = tm + 1
   ts = ts - 60
@@ -82,11 +93,13 @@ elseif ef.name == "summonerheal" then
 print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> HEAL ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
 elseif ef.name == "summonerhaste" then
 print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> HASTE ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
+elseif ef.name == "summonerbarrier" then
+print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> BARRIER ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
+elseif ef.name == "summonerboost" then
+print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> BOOST ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
 else
 print("<font color=\"#A27AFE\"><b>"..enemy.charName.."<font color=\"#FF4848\"> D ON:</font> </b><font color=\"#FFFFFF\">" .. tm .." : "..ts)
 end
 end
 end
 end
-
-  
